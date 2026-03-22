@@ -231,7 +231,7 @@ const Admin = () => {
             className="w-full mt-2 p-3 rounded-lg bg-[#0b1220] border border-white/10 text-white"
           >
             <option value="Won">Won</option>
-            <option value="Lose">Lose</option>
+            <option value="Lost">Lost</option>
           </select>
         </div>
 

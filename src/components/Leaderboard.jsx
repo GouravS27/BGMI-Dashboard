@@ -21,41 +21,60 @@ const Leaderboard = () => {
     return <p className="text-white p-6">Loading leaderboard...</p>;
   }
 
+  // 🏆 All Cards (UPDATED)
   const cards = [
+    {
+      title: "🔥 Kills/Match(K/D)",
+      player: data.avgKillsTop,
+      key: "avgKills",
+      color: "text-green-300",
+    },
+    {
+      title: "💥 Damage/Match(D/D)",
+      player: data.avgDamageTop,
+      key: "avgDamage",
+      color: "text-yellow-300",
+    },
     {
       title: "🏆 Top Winner",
       player: data.topWins,
-      value: data.topWins?.totalWins,
+      key: "totalWins",
       color: "text-green-400",
+    },
+    {
+      title: "🛡️ Least Damage/Match",
+      player: data.avgDamageTakenTop,
+      key: "avgDamageTaken",
+      color: "text-blue-300",
     },
     {
       title: "🔥 Top Killer",
       player: data.topKills,
-      value: data.topKills?.totalKills,
+      key: "totalKills",
       color: "text-orange-400",
     },
     {
-      title: "💥 Top Damage",
+      title: "💥 Top Damage(Single Match)",
       player: data.topDamage,
-      value: data.topDamage?.totalDamage,
+      key: "totalDamage",
       color: "text-yellow-400",
     },
     {
-      title: "🛡️ Least Damage Taken",
+      title: "🛡️Total Least Damage Taken",
       player: data.leastDamageTaken,
-      value: data.leastDamageTaken?.totalDamageTaken,
+      key: "totalDamageTaken",
       color: "text-blue-400",
     },
     {
       title: "🎮 Most Matches Played",
       player: data.mostMatches,
-      value: data.mostMatches?.totalMatches,
+      key: "totalMatches",
       color: "text-purple-400",
     },
     {
-      title: "🎯 Best Kill",
+      title: "🎯 Best Kill (Single Match)",
       player: data.bestKillPlayer,
-      value: data.bestKillPlayer?.bestKill,
+      key: "bestKill",
       color: "text-red-400",
     },
   ];
@@ -73,28 +92,44 @@ const Leaderboard = () => {
             className="bg-[#0b1220] rounded-2xl p-6 border border-white/10 hover:scale-105 transition"
           >
             {/* Title */}
-            <h2 className="text-center text-lg text-gray-300 mb-2">
+            <h2 className="text-center text-lg text-gray-300 mb-4">
               {card.title}
             </h2>
 
-            {/* Avatar */}
-            <div className="flex justify-center mb-4">
-              <div className="avatar">
-                <div className="mask mask-squircle h-12">
-                  <img src="https://plus.unsplash.com/premium_photo-1713628397953-2779bb39dca4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJvcGh5fGVufDB8fDB8fHww" />
+            {/* Top 5 Players */}
+            <div className="space-y-3">
+              {card.player?.map((p, i) => (
+                <div
+                  key={i}
+                  className={`flex justify-between items-center px-3 py-2 rounded-lg ${
+                    i === 0
+                      ? "bg-yellow-500/10 border border-yellow-400"
+                      : "bg-white/5"
+                  }`}
+                >
+                  {/* Rank */}
+                  <span className="text-gray-400 font-bold">
+                    {i === 0
+                      ? "🥇"
+                      : i === 1
+                        ? "🥈"
+                        : i === 2
+                          ? "🥉"
+                          : `#${i + 1}`}
+                  </span>
+
+                  {/* Name */}
+                  <span className="text-white font-medium capitalize">{p.playerName}</span>
+
+                  {/* Value */}
+                  <span className={`${card.color} font-bold`}>
+                    {typeof p[card.key] === "number"
+                      ? p[card.key].toFixed(1)
+                      : p[card.key]}
+                  </span>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {/* Name */}
-            <h2 className="text-center text-xl font-semibold text-white">
-              {card.player?.playerName || "N/A"}
-            </h2>
-
-            {/* Value */}
-            <p className={`text-center text-2xl font-bold ${card.color} mt-2`}>
-              {card.value || 0}
-            </p>
           </div>
         ))}
       </div>
