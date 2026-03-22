@@ -1,4 +1,4 @@
-import OverviewProfile from "../components/Overview/OverviewProfile"
+import OverviewProfile from "./OverviewProfile"
 import StatGrid from "./StatGrid"
 
 const Profile = () => {

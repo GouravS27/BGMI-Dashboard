@@ -1,8 +1,8 @@
 import React from 'react'
-import OverviewProfile from './Overview/OverviewProfile'
-import OverviewStats from './Overview/OverviewStats'
-import Graph from './Overview/Graph'
+import OverviewProfile from './OverviewProfile'
+import Graph from './Graph'
 import Footer from './Footer'
+import OverviewStats from './OverviewStats'
 
 const Overview = () => {
   return (

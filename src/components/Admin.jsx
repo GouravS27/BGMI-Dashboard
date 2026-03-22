@@ -1,12 +1,9 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import API from "../utils/axios";
 
-const AdminEntry = () => {
-  const players = [
-    { id: "1", name: "Gaurav" },
-    { id: "2", name: "Omdeep" },
-    { id: "3", name: "Sahin" },
-    { id: "4", name: "Sohel" },
-  ];
+const Admin = () => {
+  const allUsers = useSelector((store) => store.auth.allUsers) || [];
 
   const maps = ["Erangel", "Miramar", "Livik"];
 
@@ -22,7 +19,7 @@ const AdminEntry = () => {
     damage: "",
     damageTaken: "",
     mvp: "No",
-    matchResult: "Won", // ✅ NEW
+    matchResult: "Won",
   });
 
   const handleChange = (e) => {
@@ -30,42 +27,82 @@ const AdminEntry = () => {
   };
 
   const handlePlayerSelect = (e) => {
-    const selected = players.find((p) => p.id === e.target.value);
+    const selected = allUsers.find((u) => u.userId === e.target.value);
+
     setForm({
       ...form,
-      playerId: selected.id,
-      playerName: selected.name,
+      playerId: selected?.userId || "",
+      playerName: selected?.name || selected?.userId || "",
     });
   };
 
   // Prevent duplicate teammates
   const getAvailablePlayers = (currentValue) => {
-    const selectedIds = [form.team1, form.team2, form.team3, form.team4];
+    const selectedIds = [
+      form.team1,
+      form.team2,
+      form.team3,
+      form.team4,
+    ];
 
-    return players.filter(
-      (p) => !selectedIds.includes(p.id) || p.id === currentValue,
+    return allUsers.filter(
+      (u) => !selectedIds.includes(u.userId) || u.userId === currentValue
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const payload = {
-      ...form,
-      teammates: [form.team1, form.team2, form.team3, form.team4]
-        .filter(Boolean)
-        .map((id) => players.find((p) => p.id === id)?.name),
-    };
+    if (!form.playerId || !form.map) {
+      alert("Please fill required fields");
+      return;
+    }
 
-    console.log("Submitted:", payload);
-    alert("Submitted ✅");
+    try {
+      const res = await API.post("/addstats", {
+        playerId: form.playerId,
+        playerName: form.playerName,
+        map: form.map,
+        team1: form.team1,
+        team2: form.team2,
+        team3: form.team3,
+        team4: form.team4,
+        kills: Number(form.kills),
+        damage: Number(form.damage),
+        damageTaken: Number(form.damageTaken),
+        mvp: form.mvp,
+        matchResult: form.matchResult,
+      });
+
+      console.log(res.data);
+      alert("✅ Stats Added Successfully");
+
+      // Reset form
+      setForm({
+        playerId: "",
+        playerName: "",
+        map: "",
+        team1: "",
+        team2: "",
+        team3: "",
+        team4: "",
+        kills: "",
+        damage: "",
+        damageTaken: "",
+        mvp: "No",
+        matchResult: "Won",
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Failed to add stats");
+    }
   };
 
   return (
     <div className="min-h-screen bg-gray-700 p-6 flex justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-gradient-to-r from-[#000000] to-[#121d30]  p-8 rounded-2xl border border-white/10"
+        className="w-full max-w-2xl bg-gradient-to-r from-[#000000] to-[#121d30] p-8 rounded-2xl border border-white/10"
       >
         <h1 className="text-2xl font-bold text-white mb-6">
           Admin Match Entry
@@ -75,13 +112,15 @@ const AdminEntry = () => {
         <div className="mb-4">
           <label className="text-gray-400 text-sm">Player</label>
           <select
+            value={form.playerId}
             onChange={handlePlayerSelect}
             className="w-full mt-2 p-3 rounded-lg bg-[#0b1220] border border-white/10 text-white"
           >
             <option value="">Select Player</option>
-            {players.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}
+
+            {allUsers.map((u) => (
+              <option key={u.userId} value={u.userId}>
+                {u.name ? `${u.name} (${u.userId})` : u.userId}
               </option>
             ))}
           </select>
@@ -105,7 +144,7 @@ const AdminEntry = () => {
           </select>
         </div>
 
-        {/* Teammates Dropdowns */}
+        {/* Teammates */}
         <div className="mb-4">
           <label className="text-gray-400 text-sm">Teammates</label>
 
@@ -120,9 +159,11 @@ const AdminEntry = () => {
               >
                 <option value="">{team.toUpperCase()}</option>
 
-                {getAvailablePlayers(form[team]).map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
+                {getAvailablePlayers(form[team]).map((u) => (
+                  <option key={u.userId} value={u.userId}>
+                    {u.name
+                      ? `${u.name} (${u.userId})`
+                      : u.userId}
                   </option>
                 ))}
               </select>
@@ -167,7 +208,7 @@ const AdminEntry = () => {
         </div>
 
         {/* MVP */}
-        <div className="mb-6">
+        <div className="mb-4">
           <label className="text-gray-400 text-sm">MVP</label>
           <select
             name="mvp"
@@ -180,6 +221,7 @@ const AdminEntry = () => {
           </select>
         </div>
 
+        {/* Match Result */}
         <div className="mb-6">
           <label className="text-gray-400 text-sm">Match Result</label>
           <select
@@ -205,4 +247,4 @@ const AdminEntry = () => {
   );
 };
 
-export default AdminEntry;
+export default Admin;
