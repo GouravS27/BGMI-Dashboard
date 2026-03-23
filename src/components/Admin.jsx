@@ -36,7 +36,7 @@ const Admin = () => {
     });
   };
 
-  // Prevent duplicate teammates
+  bg-linear-to-r Prevent duplicate teammates
   const getAvailablePlayers = (currentValue) => {
     const selectedIds = [
       form.team1,
@@ -77,7 +77,7 @@ const Admin = () => {
       console.log(res.data);
       alert("✅ Stats Added Successfully");
 
-      // Reset form
+      bg-linear-to-r Reset form
       setForm({
         playerId: "",
         playerName: "",

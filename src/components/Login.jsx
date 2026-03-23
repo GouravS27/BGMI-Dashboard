@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-700 pb-20">
+    <div className="min-h-screen flex items-center justify-center bg-gray-700 pb-30 m-4">
       <div className="bg-linear-to-r from-[#000000] to-[#121d30] p-8 rounded-2xl border border-white/10 w-full max-w-md shadow-lg">
         <h1 className="text-2xl font-bold text-white text-center mb-6">
           BGMI Tracker Login

@@ -31,7 +31,6 @@ const OverviewProfile = () => {
     <div className="m-2">
       <div className="bg-gradient-to-r from-[#000000] to-[#121d30] rounded-2xl p-6 flex items-center gap-6 shadow-lg border border-white/10">
 
-        {/* Avatar */}
         <div className="w-20 h-20 rounded-xl bg-black flex items-center justify-center shadow-lg mask mask-squircle">
           <img
             src="https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600&auto=format&fit=crop&q=60"
@@ -39,7 +38,6 @@ const OverviewProfile = () => {
           />
         </div>
 
-        {/* Info */}
         <div>
           <div className="flex items-center gap-3">
             <h2 className="text-2xl font-bold text-white">
@@ -47,7 +45,6 @@ const OverviewProfile = () => {
             </h2>
           </div>
 
-          {/* Stats */}
           <div className="flex items-center gap-6 mt-2 text-sm font-bold">
             <span className="text-orange-400">
               🏆 {stats?.totalKills || 0} Kills

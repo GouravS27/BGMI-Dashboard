@@ -21,7 +21,6 @@ const Leaderboard = () => {
     return <p className="text-white p-6">Loading leaderboard...</p>;
   }
 
-  // 🏆 All Cards (UPDATED)
   const cards = [
     {
       title: "🔥 Kills/Match(K/D)",
@@ -84,19 +83,16 @@ const Leaderboard = () => {
       <h1 className="text-2xl font-bold text-white">Leaderboard</h1>
       <p className="text-gray-400 mb-6">Top performers in your squad</p>
 
-      {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {cards.map((card, index) => (
           <div
             key={index}
             className="bg-[#0b1220] rounded-2xl p-6 border border-white/10 hover:scale-105 transition"
           >
-            {/* Title */}
             <h2 className="text-center text-lg text-gray-300 mb-4">
               {card.title}
             </h2>
 
-            {/* Top 5 Players */}
             <div className="space-y-3">
               {card.player?.map((p, i) => (
                 <div
@@ -107,7 +103,6 @@ const Leaderboard = () => {
                       : "bg-white/5"
                   }`}
                 >
-                  {/* Rank */}
                   <span className="text-gray-400 font-bold">
                     {i === 0
                       ? "🥇"
@@ -118,10 +113,8 @@ const Leaderboard = () => {
                           : `#${i + 1}`}
                   </span>
 
-                  {/* Name */}
                   <span className="text-white font-medium capitalize">{p.playerName}</span>
 
-                  {/* Value */}
                   <span className={`${card.color} font-bold`}>
                     {typeof p[card.key] === "number"
                       ? p[card.key].toFixed(1)

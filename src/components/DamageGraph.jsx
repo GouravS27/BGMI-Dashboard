@@ -51,7 +51,7 @@ const DamageGraph = () => {
             <Line
               type="monotone"
               dataKey="damage"
-              stroke="#eab308" // yellow
+              stroke="#eab308" 
               strokeWidth={3}
               dot
             />

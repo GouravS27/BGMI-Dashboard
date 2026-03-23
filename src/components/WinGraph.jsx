@@ -31,7 +31,6 @@ const WinGraph = () => {
   return (
     <div className="bg-gradient-to-r from-[#000000] to-[#121d30] p-6 rounded-2xl border border-white/10">
       
-      {/* ✅ Dynamic Title */}
       <h2 className="text-white text-lg mb-4">
         Last {total} Matches (Kills)
       </h2>
