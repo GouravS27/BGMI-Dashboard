@@ -23,13 +23,13 @@ const Leaderboard = () => {
 
   const cards = [
     {
-      title: "🔥 Kills/Match(K/D)",
+      title: "🔥 Kills/Match (K/D)",
       player: data.avgKillsTop,
       key: "avgKills",
       color: "text-green-300",
     },
     {
-      title: "💥 Damage/Match(D/D)",
+      title: "💥 Damage/Match (D/D)",
       player: data.avgDamageTop,
       key: "avgDamage",
       color: "text-yellow-300",
@@ -39,6 +39,26 @@ const Leaderboard = () => {
       player: data.topWins,
       key: "totalWins",
       color: "text-green-400",
+    },
+    {
+      title: "🎯 Win Rate (%)",
+      player: data.topWinRate,
+      key: "winRate",
+      color: "text-emerald-400",
+      isPercentage: true,
+    },
+    {
+      title: "👑 MVP Count",
+      player: data.topMVPs,
+      key: "totalMVPs",
+      color: "text-pink-400",
+    },
+    {
+      title: "⚡ MVP Rate (%)",
+      player: data.topMVPRate,
+      key: "mvpRate",
+      color: "text-fuchsia-400",
+      isPercentage: true,
     },
     {
       title: "🛡️ Least Damage/Match",
@@ -53,13 +73,13 @@ const Leaderboard = () => {
       color: "text-orange-400",
     },
     {
-      title: "💥 Top Damage(Single Match)",
+      title: "💥 Total Damage",
       player: data.topDamage,
       key: "totalDamage",
       color: "text-yellow-400",
     },
     {
-      title: "🛡️Total Least Damage Taken",
+      title: "🛡️ Least Damage Taken (Total)",
       player: data.leastDamageTaken,
       key: "totalDamageTaken",
       color: "text-blue-400",
@@ -107,17 +127,21 @@ const Leaderboard = () => {
                     {i === 0
                       ? "🥇"
                       : i === 1
-                        ? "🥈"
-                        : i === 2
-                          ? "🥉"
-                          : `#${i + 1}`}
+                      ? "🥈"
+                      : i === 2
+                      ? "🥉"
+                      : `#${i + 1}`}
                   </span>
 
-                  <span className="text-white font-medium capitalize">{p.playerName}</span>
+                  <span className="text-white font-medium capitalize">
+                    {p.playerName}
+                  </span>
 
                   <span className={`${card.color} font-bold`}>
                     {typeof p[card.key] === "number"
-                      ? p[card.key].toFixed(1)
+                      ? card.isPercentage
+                        ? `${p[card.key].toFixed(1)}%`
+                        : p[card.key].toFixed(1)
                       : p[card.key]}
                   </span>
                 </div>
