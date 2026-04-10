@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/axios";
@@ -28,10 +28,16 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-700 pb-30 m-4">
-      <div className="bg-linear-to-r from-[#000000] to-[#121d30] p-8 rounded-2xl border border-white/10 w-full max-w-md shadow-lg">
+    <div
+      className="min-h-screen flex items-center justify-center pb-30 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1689443111130-6e9c7dfd8f9e?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+      }}
+    >
+      <div className="bg-linear-to-r from-[#000000] to-[#121d30] p-8 rounded-2xl border border-white/10 w-full max-w-md shadow-lg m-2">
         <h1 className="text-2xl font-bold text-white text-center mb-6">
-          BGMI Tracker Login
+          BGMI Statistics Tracker
         </h1>
 
         <div className="mb-4">

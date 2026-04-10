@@ -50,9 +50,6 @@ const Navbar = () => {
             <NavLink to="/leaderboard" className={getClass}>
               Leaderboard
             </NavLink>
-            <NavLink to="/compare" className={getClass}>
-              Compare
-            </NavLink>
             <NavLink to="/profile" className={getClass}>
               Profile
             </NavLink>
@@ -86,9 +83,6 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/leaderboard" className={getClass}>
             Leaderboard
-          </NavLink>
-          <NavLink to="/compare" className={getClass}>
-            Compare
           </NavLink>
           <NavLink to="/profile" className={getClass}>
             Profile

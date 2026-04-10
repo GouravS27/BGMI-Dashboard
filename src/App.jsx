@@ -7,7 +7,6 @@ import Leaderboard from "./components/Leaderboard";
 import Matches from "./components/Matches";
 import Login from "./components/Login";
 import Admin from "./components/Admin";
-import Comparison from "./components/Comparison";
 
 function App() {
 
@@ -18,7 +17,6 @@ function App() {
           <Route index element={<Overview />} />
           <Route path="profile" element={<Profile />} />
           <Route path="leaderboard" element={<Leaderboard />} />
-          <Route path="compare" element={<Comparison />} />
           <Route path="matches" element={<Matches />} />
           <Route path="login" element={<Login />} />
           <Route path="admin" element={<Admin />} />
